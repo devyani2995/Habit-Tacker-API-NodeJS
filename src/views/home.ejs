@@ -1,0 +1,45 @@
+<!-- Input box to enter a new habit -->
+<div class="container">
+  <form
+    class="d-flex"
+    role="search"
+    method="post"
+    action="/addHabbit"
+    class="search-box"
+  >
+    <!-- Input field to enter the name of the habit -->
+    <input
+      class="form-control me-2 fo"
+      name="name"
+      type="search"
+      placeholder="Enter habit.."
+      required
+    />
+    <!-- Submit button to add the habit -->
+    <button class="btn add-button" type="submit">Add</button>
+  </form>
+</div>
+
+<!-- Display the list of habits on the main page -->
+<div style="margin: 6vw">
+  <!-- If the habit list is empty -->
+  <% if (habits.length===0) { %>
+  <p style="text-align: center; color: #bd263c">
+    <strong>Your habit list is empty!</strong>
+  </p>
+  <p style="text-align: center; color: #bd263c">
+    <b><i>Please add habits....</i></b>
+  </p>
+  <% } else{%> 
+   <!-- Loop through each habit and display its name and days of completion -->
+   <% habits.forEach(habit => { %>
+  <div class="habbits">
+     <!-- Display habit name -->
+    <h5><b><%= habit.name %></b></h5>
+    <!-- Display days of completion of habit -->
+    <div style="color: #891111; font-weight: 700">
+      <%= habit.completedDays %> / 7 Days
+    </div>
+  </div>
+  <% }) %> <% } %>
+</div>

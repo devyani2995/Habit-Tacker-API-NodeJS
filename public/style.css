@@ -1,0 +1,86 @@
+body{
+    background: #FDC0C7 !important;
+}
+
+.navbar {
+    background-color: #de5870;
+}
+
+.picture {
+    width: 62px;
+    border-radius: 30px;
+    margin-right: 1vw;
+}
+
+.nav-item a{
+    color: floralwhite !important;
+    font-size: larger;
+    font-weight: 500;
+}
+
+.nav-item a:hover{
+    color: #a42b2b !important;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 50vw;
+    margin: 50px auto;
+}
+
+.container input {
+    width: 600px;
+}
+
+.add-button{
+    background-color: #de5870 !important;
+    border: none !important;
+    width: 12vw;
+    color: floralwhite !important;
+}
+
+.form-control:focus {
+    border: 2px solid;
+    border-color: #de5870 !important;
+    box-shadow:none !important;
+}
+
+
+.habbits {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 1px 3px 5px;
+    margin: 17px;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #0000002e;
+}
+
+.habbits h5 {
+    margin: auto 2px;
+    color: #c03d50;
+}
+
+.habbits .btn {
+    margin-left: 40px;
+}
+
+.container-fluid h2 {
+    width: 400px;
+    font-weight: bold;
+    text-align: center;
+
+}
+
+.container li {
+    list-style: none;
+    display: inline;
+    margin-bottom: 5px;
+}
+
+.navbar-brand {
+    color: #891111 !important;
+}
