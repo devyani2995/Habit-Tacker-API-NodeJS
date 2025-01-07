@@ -29,7 +29,7 @@ A simple habit tracker application built by using NodeJS, ExpressJS, EJS, and Mo
 
 - **Start the development server:**
    nodemon server.js
-   
+
 - Open your browser and navigate to http://localhost:5100 to view the app.
 
 ## Screenshots
@@ -41,3 +41,7 @@ A simple habit tracker application built by using NodeJS, ExpressJS, EJS, and Mo
 - **Week View Page**
 
 ![alt text](habitTracker-WeekView.png)
+
+## Hosted URL:
+
+https://cn-habit-tacker-api.onrender.com
