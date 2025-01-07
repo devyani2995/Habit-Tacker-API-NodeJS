@@ -21,11 +21,15 @@ A simple habit tracker application built by using NodeJS, ExpressJS, EJS, and Mo
 ## Steps to Install and Run
 
 - **Clone the repository:**
-  - git clone
-  - cd
+  - git clone https://github.com/devyani2995/Habit-Tacker-API-NodeJS.git
+  - cd Habit-Tacker-API-NodeJS
 
-- **Install dependencies:**npm install
-- **Start the development server:**nodemon server.js
+- **Install dependencies:**
+   npm install
+
+- **Start the development server:**
+   nodemon server.js
+   
 - Open your browser and navigate to http://localhost:5100 to view the app.
 
 ## Screenshots
