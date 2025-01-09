@@ -30,15 +30,26 @@
   <p style="text-align: center; color: #bd263c">
     <b><i>Please add habits....</i></b>
   </p>
-  <% } else{%> 
-   <!-- Loop through each habit and display its name and days of completion -->
-   <% habits.forEach(habit => { %>
+  <% } else{%>
+  <!-- Loop through each habit and display its name and days of completion -->
+  <% habits.forEach(habit => { %>
   <div class="habbits">
-     <!-- Display habit name -->
+    <!-- Display habit name -->
     <h5><b><%= habit.name %></b></h5>
+
     <!-- Display days of completion of habit -->
     <div style="color: #891111; font-weight: 700">
       <%= habit.completedDays %> / 7 Days
+    </div>
+
+    <!-- Display delete icon to delete habit by id -->
+    <div class="delete">
+      <a
+        href="/delete-habit/?id=<%=habit._id%>"
+        style="color: whitesmoke; font-size: larger"
+      >
+        <i class="fas fa-times"></i>
+      </a>
     </div>
   </div>
   <% }) %> <% } %>

@@ -118,4 +118,14 @@ export const toggleStatus = async(req,res)=>{
         console.log(err.message);
         res.redirect('back');
     }    
-}  
+} 
+
+export const deleteHabit = async(req,res) => {
+    try {
+        const id=req.query.id;
+        await HabitModel.findByIdAndDelete(id);     
+        return res.redirect('back');
+       } catch (error) {
+        res.status(500).send('Internal server error')
+       }
+}
