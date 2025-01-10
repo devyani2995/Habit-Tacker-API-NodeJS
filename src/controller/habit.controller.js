@@ -2,7 +2,7 @@ import {HabitModel} from "../model/habit.schema.js";
 
 
 // Controller to fetch and display all habits
-export const getAllHabbit = async(req,res)=>{
+export const getAllHabit = async(req,res)=>{
     
     const habits = await HabitModel.find().sort({'createdAt': -1});
     return res.render('home',{habits});

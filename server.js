@@ -7,7 +7,7 @@ import path from 'path';
 //Function to connect to the MongoDB database
 import { connectUsingMongoose } from './src/config/mongooseConfig.js';
 //Importing all controller functions
-import { addHabits, deleteHabit, getAllHabbit, getWeekView, toggleStatus } from './src/controller/habit.controller.js';
+import { addHabits, deleteHabit, getAllHabit, getWeekView, toggleStatus } from './src/controller/habit.controller.js';
 
 //Initialize the Express application
 const server = express();
@@ -28,14 +28,14 @@ server.set("views", path.join(path.resolve(), 'src', 'views'));
 server.use(ejsLayouts);
 
 //Route to handle the home page and fetch all habits
-server.get('/', getAllHabbit);
-//Post request to add habbits in database
+server.get('/', getAllHabit);
+//Post request to add habits in database
 server.post('/addHabbit', addHabits);
 //Route to display a week-view of habits
 server.get('/week-view', getWeekView);
 //Route to toggle the status of a habit for a specific day in the week view
 server.get('/week-view/toggle-status', toggleStatus);
-//Route to delete a habbit by id
+//Route to delete a habit by id
 server.get('/delete-habit',deleteHabit);
 
 //Listen port
