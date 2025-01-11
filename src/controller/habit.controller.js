@@ -21,7 +21,7 @@ export const addHabits = async (req, res) => {
             year: 'numeric', // Full year (e.g., "2025")
         });
 
-        // Create an weekStatus array with 7 elements, each initialized to 'null'
+        // Create an weekStatus array with 7 elements, each initialized to 'null' to track the status of a each habit for 7 days
         const weekStatus = Array(7).fill(null);
 
         // creating new element in mongodb
