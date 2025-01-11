@@ -118,7 +118,7 @@ export const toggleStatus = async (req, res) => {
         // Save the updated habit in the database
         await habit.save();
 
-        // Redirect back to the previous page
+        // Redirecting back to the previous page
         return res.redirect('back');
     }
     catch (err) {
@@ -127,10 +127,14 @@ export const toggleStatus = async (req, res) => {
     }
 }
 
+// Controller to delete the habit by ID
 export const deleteHabit = async (req, res) => {
     try {
+        // Getting the ID of the habit from to be deleted from the query parameters
         const id = req.query.id;
+        // Deleting the habit with the specified ID from the database
         await HabitModel.findByIdAndDelete(id);
+         // Redirect the user back to the previous page after successful deletion
         return res.redirect('back');
     } catch (error) {
         res.status(500).send('Internal server error')
