@@ -95,7 +95,7 @@ export const toggleStatus = async (req, res) => {
 
         // if the new status is true (done)
         if (status === 'true') {
-            // if task is not already done update the status
+            // if task is not already done
             if (habit.weeklyStatus[index] !== 'true') {
 
                 // increase the number of days on which the task is completed
