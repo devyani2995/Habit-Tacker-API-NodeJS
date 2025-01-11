@@ -1,29 +1,36 @@
-import {HabitModel} from "../model/habit.schema.js";
+import { HabitModel } from "../model/habit.schema.js";
 
 
 // Controller to fetch and display all habits
-export const getAllHabit = async(req,res)=>{
-    
-    const habits = await HabitModel.find().sort({'createdAt': -1});
-    return res.render('home',{habits});
+export const getAllHabit = async (req, res) => {
+
+    const habits = await HabitModel.find().sort({ 'createdAt': -1 });
+    return res.render('home', { habits });
 }
 
 // Controller to add a new habit
-export const addHabits = async(req,res) => {
+export const addHabits = async (req, res) => {
     try {
-        // getting today's date
-        let date = new Date().toString();
-        date =`${date.slice(4,15)}`;
+        // Create a new Date object to show the current date and time
+        let date = new Date();
 
+        // Format the date as a string in the format "MMM DD, YYYY" (e.g., "Jan 10, 2025")
+        date = date.toLocaleDateString('en-US', {
+            month: 'short', // Abbreviated month name (e.g., "Jan")
+            day: '2-digit', // Day with leading zero if needed (e.g., "10")
+            year: 'numeric', // Full year (e.g., "2025")
+        });
+
+        // Create an weekStatus array with 7 elements, each initialized to 'null'
         const weekStatus = Array(7).fill(null);
-        
+
         // creating new element in mongodb
         await HabitModel.create({
-        // getting the value of name 
-            name:req.body.name,
-            createdAt:date,
-            weeklyStatus:weekStatus,
-            completedDays:0
+            // getting the value of name 
+            name: req.body.name,
+            createdAt: date,
+            weeklyStatus: weekStatus,
+            completedDays: 0
         });
 
         return res.redirect('/');
@@ -38,36 +45,36 @@ const CalculateDayOfWeek = (date) => {
     // Array to store the past week's dates and days
     var days = new Array();
     // Storing values in asceding order of date
-    for (var i = 6; i >= 0; i--){
+    for (var i = 6; i >= 0; i--) {
         // store values in the form of string
-        days[6-i] = new Date(date.getFullYear(), date.getMonth(), date.getDate() - i).toString();
-        days[6-i] = `${days[6-i].slice(0,4)}, ${days[6-i].slice(4,11)}`;
+        days[6 - i] = new Date(date.getFullYear(), date.getMonth(), date.getDate() - i).toString();
+        days[6 - i] = `${days[6 - i].slice(0, 4)}, ${days[6 - i].slice(4, 11)}`;
     }
     // return the array of dates 
     return days;
 }
 
 // Controller to render the week view of habits
-export const getWeekView = async(req,res)=>{  
+export const getWeekView = async (req, res) => {
     try {
         // Get today's date
         let date = new Date().toString();
 
         // getting only the date part
-        date =`${date.slice(0,3)},${date.slice(3,15)}`;
+        date = `${date.slice(0, 3)},${date.slice(3, 15)}`;
 
         // Getting days of past week
         const pastWeek = CalculateDayOfWeek(new Date());
-        
+
         // Fetching all the habits from database
         const habits = await HabitModel.find();
 
-         // Render the 'weekView' view 
-        return res.render('weekView',{
-            date:date,
-            habits:habits,
-            weekDays:pastWeek 
-        });   
+        // Render the 'weekView' view 
+        return res.render('weekView', {
+            date: date,
+            habits: habits,
+            weekDays: pastWeek
+        });
 
     } catch (error) {
         console.log(error);
@@ -76,56 +83,56 @@ export const getWeekView = async(req,res)=>{
 }
 
 // Controller to toggle the status of a habit for a specific day
-export const toggleStatus = async(req,res)=>{ 
-    try{
+export const toggleStatus = async (req, res) => {
+    try {
         // Get the habit ID, day index, and new status from query parameters
         let id = req.query.id;
         let index = req.query.i;
         let status = req.query.status;
 
         // Get the habit document by ID
-        const habit = await HabitModel.findOne({_id:id});
+        const habit = await HabitModel.findOne({ _id: id });
 
         // if the new status is true (done)
-        if(status === 'true'){
+        if (status === 'true') {
             // if task is not already done update the status
-            if(habit.weeklyStatus[index] !== 'true'){
+            if (habit.weeklyStatus[index] !== 'true') {
 
                 // increase the number of days on which the task is completed
                 habit.completedDays = habit.completedDays + 1;
             }
         }
         // if new status is not true (pending)
-        else{
+        else {
             // if task was previously done
-            if(habit.weeklyStatus[index] === 'true'){
-                
+            if (habit.weeklyStatus[index] === 'true') {
+
                 // reduce the number of day on which the habit is completed
                 habit.completedDays = habit.completedDays - 1;
             }
         }
 
-         // Update the status for the specific day
+        // Update the status for the specific day
         habit.weeklyStatus[index] = status;
 
         // Save the updated habit in the database
         await habit.save();
 
-         // Redirect back to the previous page
+        // Redirect back to the previous page
         return res.redirect('back');
     }
-    catch(err){
+    catch (err) {
         console.log(err.message);
         res.redirect('back');
-    }    
-} 
+    }
+}
 
-export const deleteHabit = async(req,res) => {
+export const deleteHabit = async (req, res) => {
     try {
-        const id=req.query.id;
-        await HabitModel.findByIdAndDelete(id);     
+        const id = req.query.id;
+        await HabitModel.findByIdAndDelete(id);
         return res.redirect('back');
-       } catch (error) {
+    } catch (error) {
         res.status(500).send('Internal server error')
-       }
+    }
 }
