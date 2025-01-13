@@ -57,12 +57,6 @@ const CalculateDayOfWeek = (date) => {
 // Controller to render the week view of habits
 export const getWeekView = async (req, res) => {
     try {
-        // Get today's date
-        let date = new Date().toString();
-
-        // getting only the date part
-        date = `${date.slice(0, 3)},${date.slice(3, 15)}`;
-
         // Getting days of past week
         const pastWeek = CalculateDayOfWeek(new Date());
 
@@ -71,7 +65,6 @@ export const getWeekView = async (req, res) => {
 
         // Render the 'weekView' view 
         return res.render('weekView', {
-            date: date,
             habits: habits,
             weekDays: pastWeek
         });
